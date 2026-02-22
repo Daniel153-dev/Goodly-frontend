@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: goodly-frontend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: ENVIRONMENT
+        value: production
