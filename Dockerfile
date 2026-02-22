@@ -1,5 +1,5 @@
 # Dockerfile pour builder et servir Flutter Web
-FROM ghcr.io/cirruslabs/flutter:3.24.0 AS build
+FROM ghcr.io/cirruslabs/flutter:3.27.0 AS build
 
 WORKDIR /app
 
