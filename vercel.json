@@ -1,5 +1,8 @@
 {
-  "outputDirectory": "web-build",
+  "buildCommand": "flutter build web --release --dart-define=ENVIRONMENT=production",
+  "outputDirectory": "build/web",
+  "framework": null,
+  "installCommand": "flutter pub get",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
