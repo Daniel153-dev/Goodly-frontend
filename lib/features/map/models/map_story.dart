@@ -25,9 +25,6 @@ class MapStory {
   final bool isExpired;
   final bool isOwner;
 
-  // Préfixe serveur pour les URLs
-  static const String _serverPrefix = 'http://localhost:8007';
-
   MapStory({
     required this.idStory,
     required this.idUtilisateur,

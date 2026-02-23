@@ -256,7 +256,7 @@ class ApiConstants {
   // ============================================
   static String get baseUrlStories {
     if (isProduction) {
-      return '$baseUrl';
+      return '$baseUrl/api/stories';
     }
     // En développement, utiliser le port 8007 pour le story_service
     if (kIsWeb) {
