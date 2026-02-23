@@ -31,15 +31,19 @@ class ApiConstants {
     if (_environment == 'production') {
       return _prodApiUrl;
     }
-
-    // En développement, utiliser l'API_URL définie ou localhost par défaut
-    // Pour le web, on utilise l'URL absolue
+    
+    // Détection automatique pour le web en production
     if (kIsWeb) {
+      // Si on n'est pas sur localhost, on est en production
+      final currentHost = Uri.base.host;
+      if (currentHost != 'localhost' && currentHost != '127.0.0.1') {
+        return _prodApiUrl;
+      }
       return _devApiUrl;
     }
 
     // Pour l'émulateur Android en développement, utiliser l'alias 10.0.2.2
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       return _devApiUrl.replaceAll('localhost', '10.0.2.2');
     }
 
@@ -48,10 +52,21 @@ class ApiConstants {
   }
 
   /// Vérifie si on est en production
-  static bool get isProduction => _environment == 'production';
+  static bool get isProduction {
+    // Si défini explicitement via --dart-define
+    if (_environment == 'production') {
+      return true;
+    }
+    // Détection automatique pour le web
+    if (kIsWeb) {
+      final currentHost = Uri.base.host;
+      return currentHost != 'localhost' && currentHost != '127.0.0.1';
+    }
+    return false;
+  }
 
   /// Vérifie si on est en développement
-  static bool get isDevelopment => _environment == 'development';
+  static bool get isDevelopment => !isProduction;
 
   // Endpoints d'authentification
   static const String inscription = '/auth/inscription';
@@ -236,7 +251,8 @@ class ApiConstants {
 
   // ============================================
   // Endpoints de stories géolocalisées
-  // Le story service tourne sur le port 8007
+  // En production: /api/stories sur le backend monolithique
+  // En développement: port 8007 pour le story_service
   // ============================================
   static String get baseUrlStories {
     if (isProduction) {
@@ -246,7 +262,7 @@ class ApiConstants {
     if (kIsWeb) {
       return 'http://localhost:8007';
     }
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       return 'http://10.0.2.2:8007';
     }
     return 'http://localhost:8007';
@@ -254,7 +270,8 @@ class ApiConstants {
 
   // ============================================
   // Endpoints du service de publications
-  // Le publications service tourne sur le port 8002
+  // En production: /publications sur le backend monolithique
+  // En développement: port 8002 pour le publications_service
   // ============================================
   static String get publicationsService {
     if (isProduction) {
@@ -264,7 +281,7 @@ class ApiConstants {
     if (kIsWeb) {
       return 'http://localhost:8002';
     }
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       return 'http://10.0.2.2:8002';
     }
     return 'http://localhost:8002';
