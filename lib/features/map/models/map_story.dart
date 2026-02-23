@@ -56,8 +56,8 @@ class MapStory {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
-    // Ajouter le préfixe localhost pour le développement
-    return '$_serverPrefix$url';
+    // Retourner l'URL telle quelle - le backend devrait déjà fournir des URLs complètes
+    return url;
   }
 
   factory MapStory.fromJson(Map<String, dynamic> json) {
@@ -161,3 +161,4 @@ class MapStoryStats {
     );
   }
 }
+
