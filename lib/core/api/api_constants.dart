@@ -83,14 +83,14 @@ class ApiConstants {
   static const String supprimerCompte = '/auth/profil';
 
   // Endpoints de publications
-  static const String creerPublication = '/publications/publications';
-  static const String fluxPublications = '/publications/publications/flux';
-  static const String mesPublications = '/publications/publications/mes-publications';
-  static String publicationsUtilisateur(String userId) => '/publications/publications/utilisateur/$userId';
-  static String publication(String id) => '/publications/publications/$id';
-  static String supprimerPublication(String id) => '/publications/publications/$id';
-  static const String uploadImages = '/publications/upload-images';
-  static const String uploadVideos = '/publications/upload-videos';
+  static const String creerPublication = '/publications';
+  static const String fluxPublications = '/publications/flux';
+  static const String mesPublications = '/publications/mes-publications';
+  static String publicationsUtilisateur(String userId) => '/publications/utilisateur/$userId';
+  static String publication(String id) => '/publications/$id';
+  static String supprimerPublication(String id) => '/publications/$id';
+  static const String uploadImages = '/upload-images';
+  static const String uploadVideos = '/upload-videos';
 
   // Endpoints d'inspirations
   static const String ajouterInspiration = '/publications/inspirations';
