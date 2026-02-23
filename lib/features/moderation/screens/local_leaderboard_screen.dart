@@ -48,7 +48,7 @@ class _LocalLeaderboardScreenState extends State<LocalLeaderboardScreen> {
 
     try {
       final apiClient = ApiClient();
-      final response = await apiClient.get('${ApiConstants.publicationsService}${ApiConstants.leaderboardPays}');
+      final response = await apiClient.get('${ApiConstants.baseUrl}${ApiConstants.leaderboardPays}');
       
       setState(() {
         _paysList = List<Map<String, dynamic>>.from(response.data['pays'] ?? []);
