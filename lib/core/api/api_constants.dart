@@ -19,7 +19,7 @@ class ApiConstants {
   // URL de l'API pour production (Render)
   static const String _prodApiUrl = String.fromEnvironment(
     'API_URL',
-    defaultValue: 'https://goodly.abrdns.com/',
+    defaultValue: 'https://api.goodly.abrdns.com',
   );
 
   /// URL de base dynamique selon l'environnement et la plateforme
