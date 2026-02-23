@@ -45,11 +45,12 @@ class MapStoryService {
           'media_2_caption': media2Caption,
       };
       
+      final url = '${ApiConstants.baseUrlStories}/api/stories/create';
       print('Body: $body');
-      print('URL: ${ApiConstants.baseUrlStories}/api/stories/create');
+      print('URL: $url');
 
       final response = await _apiClient.post(
-        'http://localhost:8007/api/stories/create',
+        url,
         data: body,
       );
 
@@ -77,7 +78,7 @@ class MapStoryService {
     print('Latitude: $latitude, Longitude: $longitude, Radius: $radiusKm');
     
     try {
-      final url = 'http://localhost:8007/api/stories/nearby?latitude=$latitude&longitude=$longitude&radius=$radiusKm';
+      final url = '${ApiConstants.baseUrlStories}/api/stories/nearby?latitude=$latitude&longitude=$longitude&radius=$radiusKm';
       print('URL: $url');
 
       final response = await _apiClient.get(url);
@@ -105,7 +106,7 @@ class MapStoryService {
     print('=== GET STORY $storyId ===');
     
     try {
-      final url = 'http://localhost:8007/api/stories/$storyId';
+      final url = '${ApiConstants.baseUrlStories}/api/stories/$storyId';
       final response = await _apiClient.get(url);
 
       print('Response status: ${response.statusCode}');
@@ -128,7 +129,7 @@ class MapStoryService {
     print('=== VIEW STORY $storyId ===');
     
     try {
-      final url = 'http://localhost:8007/api/stories/$storyId/view';
+      final url = '${ApiConstants.baseUrlStories}/api/stories/$storyId/view';
       final response = await _apiClient.post(url, data: {});
 
       print('Response status: ${response.statusCode}');
@@ -145,7 +146,7 @@ class MapStoryService {
   /// Récupère les statistiques des stories de l'utilisateur
   static Future<MapStoryStats> getMyStats() async {
     try {
-      final url = 'http://localhost:8007/api/stories/my/stats';
+      final url = '${ApiConstants.baseUrlStories}/api/stories/my/stats';
       final response = await _apiClient.get(url);
 
       if (response.statusCode == 200) {
@@ -163,7 +164,7 @@ class MapStoryService {
     print('=== DELETE STORY $storyId ===');
     
     try {
-      final url = 'http://localhost:8007/api/stories/$storyId';
+      final url = '${ApiConstants.baseUrlStories}/api/stories/$storyId';
       final response = await _apiClient.delete(url);
 
       print('Response status: ${response.statusCode}');
