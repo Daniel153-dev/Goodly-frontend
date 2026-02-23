@@ -55,13 +55,17 @@ class ApiConstants {
   static bool get isProduction {
     // Si défini explicitement via --dart-define
     if (_environment == 'production') {
+      print('[API CONSTANTS] Production détectée via --dart-define');
       return true;
     }
     // Détection automatique pour le web
     if (kIsWeb) {
       final currentHost = Uri.base.host;
-      return currentHost != 'localhost' && currentHost != '127.0.0.1';
+      final isProd = currentHost != 'localhost' && currentHost != '127.0.0.1';
+      print('[API CONSTANTS] Détection web: host=$currentHost, production=$isProd');
+      return isProd;
     }
+    print('[API CONSTANTS] Non-web, production=false');
     return false;
   }
 
@@ -255,17 +259,28 @@ class ApiConstants {
   // En développement: port 8007 pour le story_service
   // ============================================
   static String get baseUrlStories {
-    if (isProduction) {
-      return '$baseUrl/api/stories';
+    final isProd = isProduction;
+    print('[API CONSTANTS] baseUrlStories: isProduction=$isProd');
+    
+    if (isProd) {
+      final url = '$baseUrl/api/stories';
+      print('[API CONSTANTS] baseUrlStories (production): $url');
+      return url;
     }
     // En développement, utiliser le port 8007 pour le story_service
     if (kIsWeb) {
-      return 'http://localhost:8007';
+      final url = 'http://localhost:8007';
+      print('[API CONSTANTS] baseUrlStories (web dev): $url');
+      return url;
     }
     if (!kIsWeb && Platform.isAndroid) {
-      return 'http://10.0.2.2:8007';
+      final url = 'http://10.0.2.2:8007';
+      print('[API CONSTANTS] baseUrlStories (android dev): $url');
+      return url;
     }
-    return 'http://localhost:8007';
+    final url = 'http://localhost:8007';
+    print('[API CONSTANTS] baseUrlStories (default dev): $url');
+    return url;
   }
 
   // ============================================
