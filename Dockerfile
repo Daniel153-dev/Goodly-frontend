@@ -1,8 +1,9 @@
 # Dockerfile pour construire et déployer Flutter web sur Render
 # Construction en deux étapes pour optimiser la taille
+# Version 2 - Force rebuild
 
 # Étape 1: Build Flutter
-FROM ghcr.io/cirruslabs/flutter:stable AS build
+FROM ghcr.io/cirruslabs/flutter:3.24.0 AS build
 
 WORKDIR /app
 
