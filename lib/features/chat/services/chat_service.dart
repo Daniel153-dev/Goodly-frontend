@@ -76,6 +76,10 @@ class ChatService {
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
+        print('[CHAT SERVICE] getConversations response: $data');
+        for (var item in data) {
+          print('[CHAT SERVICE] Conversation: id=${item['id']}, other_user_name=${item['other_user_name']}, other_user_photo=${item['other_user_photo']}, statut=${item['statut']}');
+        }
         return data.map((e) => Conversation.fromJson(e)).toList();
       }
       return [];
