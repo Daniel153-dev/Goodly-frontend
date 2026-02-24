@@ -131,7 +131,10 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
       try {
         final session = json.decode(sessionJson);
         setState(() {
-          _currentUserId = session['user_id']?.toString() ?? session['id']?.toString();
+          // Essayer plusieurs clés possibles pour l'ID utilisateur
+          _currentUserId = session['id_utilisateur']?.toString() 
+                        ?? session['user_id']?.toString() 
+                        ?? session['id']?.toString();
           if (_otherUserName.isEmpty) {
             _otherUserName = widget.recipientName ?? 'Utilisateur';
           }
@@ -191,7 +194,10 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
               if (sessionJson != null) {
                 try {
                   final session = json.decode(sessionJson);
-                  currentUserId = session['user_id']?.toString() ?? session['id']?.toString();
+                  // Essayer plusieurs clés possibles pour l'ID utilisateur
+                  currentUserId = session['id_utilisateur']?.toString() 
+                               ?? session['user_id']?.toString() 
+                               ?? session['id']?.toString();
                 } catch (e) {
                   print('Erreur parsing session: $e');
                 }
