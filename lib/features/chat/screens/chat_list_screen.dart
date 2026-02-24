@@ -109,23 +109,23 @@ class _ChatListScreenState extends State<ChatListScreen> with WidgetsBindingObse
       final value = prefs.getString(key);
       print('[CHAT LIST] Checking key "$key": $value');
       if (value != null && value.isNotEmpty) {
-        userId = value;
-        print('[CHAT LIST] ✓ Found user_id in key "$key": $userId');
-        break;
-      }
-    }
-    
-    // Si pas trouvé directement, essayer en JSON
-    if (userId == null) {
-      final sessionJson = prefs.getString('current_session') ?? prefs.getString('user_session');
-      if (sessionJson != null && sessionJson.isNotEmpty) {
-        try {
-          final session = json.decode(sessionJson);
-          userId = session['user_id']?.toString() ?? session['id']?.toString();
-          print('[CHAT LIST] ✓ Parsed user_id from JSON: $userId');
-        } catch (e) {
-          print('[CHAT LIST] ✗ Erreur parsing session JSON: $e');
+        // Vérifier si c'est un JSON
+        if (value.startsWith('{')) {
+          try {
+            final session = json.decode(value);
+            // Essayer plusieurs clés possibles pour l'ID
+            userId = session['id_utilisateur']?.toString() 
+                  ?? session['user_id']?.toString() 
+                  ?? session['id']?.toString();
+            print('[CHAT LIST] ✓ Parsed user_id from JSON in "$key": $userId');
+          } catch (e) {
+            print('[CHAT LIST] ✗ Erreur parsing JSON in "$key": $e');
+          }
+        } else {
+          userId = value;
+          print('[CHAT LIST] ✓ Found user_id in key "$key": $userId');
         }
+        if (userId != null) break;
       }
     }
     
