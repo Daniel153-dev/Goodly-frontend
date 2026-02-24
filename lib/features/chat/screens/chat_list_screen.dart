@@ -628,6 +628,9 @@ class _ChatListScreenState extends State<ChatListScreen> with WidgetsBindingObse
   }
 
   Widget _buildPendingInvitationTile(Conversation conversation, {required bool isReceived}) {
+    // Debug: afficher les valeurs de la conversation
+    print('[CHAT LIST] _buildPendingInvitationTile: id=${conversation.id}, otherUserName=${conversation.otherUserName}, otherUserPhoto=${conversation.otherUserPhoto}, otherUserId=${conversation.otherUserId}');
+    
     return Material(
       color: Colors.transparent,
       child: InkWell(
