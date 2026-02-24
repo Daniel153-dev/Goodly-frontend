@@ -70,7 +70,7 @@ class _LocalLeaderboardScreenState extends State<LocalLeaderboardScreen> {
 
     try {
       final apiClient = ApiClient();
-      final response = await apiClient.get('${ApiConstants.publicationsService}${ApiConstants.leaderboardVilles(paysId)}');
+      final response = await apiClient.get('${ApiConstants.baseUrl}${ApiConstants.leaderboardVilles(paysId)}');
       
       setState(() {
         _villesList = List<Map<String, dynamic>>.from(response.data['villes'] ?? []);
@@ -93,7 +93,7 @@ class _LocalLeaderboardScreenState extends State<LocalLeaderboardScreen> {
 
     try {
       final apiClient = ApiClient();
-      final response = await apiClient.get('${ApiConstants.publicationsService}${ApiConstants.leaderboardQuartiers(villeId)}');
+      final response = await apiClient.get('${ApiConstants.baseUrl}${ApiConstants.leaderboardQuartiers(villeId)}');
       
       setState(() {
         _quartiersList = List<Map<String, dynamic>>.from(response.data['quartiers'] ?? []);
@@ -118,11 +118,11 @@ class _LocalLeaderboardScreenState extends State<LocalLeaderboardScreen> {
       final apiClient = ApiClient();
       String endpoint;
       if (type == 'pays') {
-        endpoint = '${ApiConstants.publicationsService}${ApiConstants.leaderboardTop300Pays(id)}';
+        endpoint = '${ApiConstants.baseUrl}${ApiConstants.leaderboardTop300Pays(id)}';
       } else if (type == 'ville') {
-        endpoint = '${ApiConstants.publicationsService}${ApiConstants.leaderboardTop300Ville(id)}';
+        endpoint = '${ApiConstants.baseUrl}${ApiConstants.leaderboardTop300Ville(id)}';
       } else {
-        endpoint = '${ApiConstants.publicationsService}${ApiConstants.leaderboardTop300Quartier(id)}';
+        endpoint = '${ApiConstants.baseUrl}${ApiConstants.leaderboardTop300Quartier(id)}';
       }
       
       final response = await apiClient.get(endpoint);
