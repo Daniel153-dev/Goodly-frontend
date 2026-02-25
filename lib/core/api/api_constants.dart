@@ -16,10 +16,10 @@ class ApiConstants {
     defaultValue: 'http://localhost:8000',
   );
 
-  // URL de l'API pour production (Render backend)
+  // URL de l'API pour production (domaine personnalisé goodly.ink)
   static const String _prodApiUrl = String.fromEnvironment(
     'API_URL',
-    defaultValue: 'https://goodly-backend-6vhs.onrender.com',
+    defaultValue: 'https://goodly.ink',
   );
 
   /// URL de base dynamique selon l'environnement et la plateforme
