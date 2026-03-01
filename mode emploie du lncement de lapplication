@@ -1,0 +1,34 @@
+﻿   1. Démarrez le backend local :
+      Dans un terminal PowerShell (en administrateur), exécutez :
+
+
+   1     cd D:\PROJECTS\GOODLY\goodly_backend
+   2     start_all_services.bat
+      Laissez ce terminal ouvert.
+
+   2. Lancez l'application Flutter en mode développement :
+      Dans un autre terminal, exécutez :
+
+
+   1     cd D:\PROJECTS\GOODLY\goodly_frontend\goodly_app
+   2     flutter run --dart-define=ENVIRONMENT=development 
+   flutter run -d edge --dart-define=API_URL=http://localhost:8000 
+      L'application se connectera automatiquement à votre backend local.
+
+      tue tous mes port backend > for /L %i in (0,1,7) do (for /f "tokens=5" %a in ('netstat -aon ^| findstr :800%i') do taskkill /F /PID %a /T)
+  ---   taskkill /F /IM python.exe /T
+  free_ports_and_restart.bat
+
+  Pour créer une version de production de votre application :
+
+
+   1. Vous n'avez pas besoin de démarrer le backend local.
+   2. Exécutez la commande de build en spécifiant l'environnement de production :
+
+
+   1     cd D:\PROJECTS\GOODLY\goodly_frontend\goodly_app
+   2     flutter build web --dart-define=ENVIRONMENT=production
+      Le build final se connectera automatiquement à votre backend de production sur https://goodly.abrdns.com/.
+
+
+  Le système hybride est maintenant entièrement en place. Vous pouvez facilement basculer entre les deux environnements sans toucher au code.
