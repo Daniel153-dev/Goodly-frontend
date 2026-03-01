@@ -6,6 +6,7 @@ services:
     dockerContext: .
     plan: free
     healthCheckPath: /
+    branch: master
     envVars:
       - key: ENVIRONMENT
         value: production
