@@ -17,10 +17,7 @@ class ApiConstants {
   );
 
   // URL de l'API pour production (domaine personnalisé goodly.ink)
-  static const String _prodApiUrl = String.fromEnvironment(
-    'API_URL',
-    defaultValue: 'https://goodly.ink',
-  );
+  static const String _prodApiUrl = 'https://goodly.ink';
 
   /// URL de base dynamique selon l'environnement et la plateforme
   ///
